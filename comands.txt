@@ -1,0 +1,14 @@
+1.php artisan serve : start do serve laravel
+2.php artisan migrate:install : cria a tabela migrations no banco
+3.php artisan migrate : entra na pasta database e executa os arquivos da migrations
+4.php artisan make:migration "create_table_store": cria uma migração
+5.php artisan migrate:rollback: volta a situação anterior do banco
+6.php artisan migrate:rollback --step=3: volta uma quantidade de etapas do banco de dados.
+7.php artisan migrate:fresh: dropa todas as tabelas e depois executa todas as migration's
+8.php artisan migrate:refresh: dar um rollback em tudo e depois executa as migration's novamente.
+9.php artisan make:seeder "UsersTableSeeder": Cria uma seeder
+10.php artisan db:seed: Cria uma seed
+11.php artisan migrate:refresh --seed: dar um rollback nas tabelas e depois as crias de novo e executa as seed's para popular as tabelas (isso tambem executa as factory).
+12.php artisan migrate:reset : (Executa os downs de todas as migrations).
+13.php artisan migrate:refresh --step=2: dar um rollback em tudo e depois executa as migration's novamente quantidade de etapadas definidas.
+14.php artisan make:model "Product"; cria uma model
