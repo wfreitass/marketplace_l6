@@ -12,3 +12,5 @@
 12.php artisan migrate:reset : (Executa os downs de todas as migrations).
 13.php artisan migrate:refresh --step=2: dar um rollback em tudo e depois executa as migration's novamente quantidade de etapadas definidas.
 14.php artisan make:model "Product"; cria uma model
+15.php artisan make:model Category -m; já cria a migration com o -m
+obs "❯ php artisan make:migration create_category_product_table --create=category_product"
