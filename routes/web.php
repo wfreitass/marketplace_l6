@@ -20,6 +20,23 @@ Route::get('/', function () {
     return view('welcome', compact("helloWorld"));
 });
 
+Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function(){
+    Route::prefix('stores')->name('stores.')->group(function(){
+        Route::get('/', 'StoreController@index')->name('index');
+        Route::get('/create', 'StoreController@create')->name('create');
+        Route::post('/store', 'StoreController@store')->name('store');
+        Route::get('/{store}/edit', 'StoreController@edit')->name('edit');
+        Route::post('/update/{store}', 'StoreController@update')->name('update');
+        Route::get('/destroy/{store}', 'StoreController@destroy')->name('destroy');
+    });
+});
+
+//Route:get:
+//Route:post:
+//Route:put:
+//Route:patch:
+//Route:delete:
+//Route:options:
 
 Route::get("/model", function () {
     //$products = \App\Product::all(); //select * from products
@@ -103,7 +120,7 @@ Route::get("/model", function () {
 
     // return \App\Category::all();
     ### Adicionar um produto para uma categoria ou vice-versa ###
-    $product = \App\Product::find(49);
+    $product = \App\Product::find(40);
     // dd($product->categories()->attach([1]));
     // dd($product->categories()->detach([1]));
     // dd($product->categories()->sync([2]));

@@ -14,3 +14,4 @@
 14.php artisan make:model "Product"; cria uma model
 15.php artisan make:model Category -m; já cria a migration com o -m
 obs "❯ php artisan make:migration create_category_product_table --create=category_product"
+16.php artisan make:controller "StoreController"
