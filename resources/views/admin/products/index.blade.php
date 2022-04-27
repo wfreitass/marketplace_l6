@@ -7,6 +7,7 @@
             <tr>
                 <th>#</th>
                 <th>Produto</th>
+                <th>Loja</th>
                 <th>Preço</th>
                 <th>Ações</th>
             </tr>
@@ -16,10 +17,19 @@
             <tr>
                 <td>{{$product->id}}</td>
                 <td>{{$product->name}}</td>
+                <td>{{$product->store->name}}</td>
                 <td>{{$product->price}}</td>
                 <td>
-                    <a href="{{route('admin.products.edit',['product'=>$product->id])}}" class="btn btn-sm btn-primary">EDITAR</a>
-                    <a href="{{route('admin.products.destroy',['product'=>$product->id])}}" class="btn btn-sm btn-danger">REMOVER</a>
+                    <div class="btn-group">
+                        <a href="{{route('admin.products.edit',['product'=>$product->id])}}" class="btn btn-sm btn-primary">EDITAR</a>
+                        <form action="{{route('admin.products.destroy',['product'=>$product->id])}}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-danger" >Remover</button>
+                        </form>
+                    </div>
+                    {{-- <a href="" class="">REMOVER</a> --}}
+
                 </td>
             </tr>
             @endforeach
