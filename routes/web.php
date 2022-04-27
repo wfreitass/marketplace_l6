@@ -128,3 +128,7 @@ Route::get("/model", function () {
     // dd($product->categories()->sync([2]));
     return $product->categories;
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
