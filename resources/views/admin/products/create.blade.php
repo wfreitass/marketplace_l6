@@ -3,7 +3,7 @@
 
 @section('content')
     <h1>Criar Produto</h1>
-    <form action="{{route('admin.products.store')}}" method="post">
+    <form action="{{route('admin.products.store')}}" method="post" enctype="multipart/form-data">
         @csrf
 
         <div class="form-group">
@@ -52,13 +52,25 @@
         </div>
 
         <div class="form-group">
+            <label for="categories">Categorias</label>
+            <select class="form-control" id="categories" name="categories[]" multiple>
+             @foreach ($categories as $categorie)
+                <option value="{{$categorie->id}}">{{$categorie->name}}</option>
+             @endforeach
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="photos">Fotos do produto</label>
+            <input type="file" multiple id="photos" name="photos[]" class="form-control">
+        </div>
+
+        <div class="form-group">
             <label>Slug</label>
             <input type="text" name="slug" class="form-control">
         </div>
-
-
-
         <div>
+
             <button type="submit" class="btn btn-lg btn-success">Criar Produto</button>
         </div>
     </form>

@@ -16,3 +16,5 @@
 obs "❯ php artisan make:migration create_category_product_table --create=category_product"
 16.php artisan make:controller "StoreController" : pode ser usado o parametro --resource para criar um controller
 17.php artisan route:list
+18.php artisan make:migration "alter_table_stores_add_column_logo" --table="stores" :: cria uma migration para alterar uma tabela
+19.php artisan storage:link :: cria um link simbolico para pergamos nossas fotos.
