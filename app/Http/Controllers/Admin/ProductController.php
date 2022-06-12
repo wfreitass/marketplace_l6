@@ -6,11 +6,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Http\Requests\ProductRequest;
+
 class ProductController extends Controller
 {
     private $product;
 
-    public function __construct(Product $product){
+    public function __construct(Product $product)
+    {
         $this->product = $product;
     }
 
@@ -34,7 +36,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $categories = \App\Category::all(['id','name']);
+        $categories = \App\Category::all(['id', 'name']);
         return view('admin.products.create', compact('categories'));
     }
 
@@ -51,7 +53,7 @@ class ProductController extends Controller
         $product = $store->products()->create($data);
         $product->categories()->sync($data['categories']);
 
-        if($request->hasFile('photos')){
+        if ($request->hasFile('photos')) {
             $images = $this->imageUpload($request, 'image');
             $product->photos()->createMany($images);
         }
@@ -81,7 +83,7 @@ class ProductController extends Controller
     {
         $product = $this->product->findOrFail($product);
         // dd($product->categories[0]->id);
-        $categories = \App\Category::all(['id','name']);
+        $categories = \App\Category::all(['id', 'name']);
         return view('admin.products.edit', compact('product', 'categories'));
     }
 
@@ -99,7 +101,7 @@ class ProductController extends Controller
         $product = $this->product->find($product);
         $product->update($data);
         $product->categories()->sync($data['categories']);
-        if($request->hasFile('photos')){
+        if ($request->hasFile('photos')) {
             $images = $this->imageUpload($request, 'image');
             $product->photos()->createMany($images);
         }
@@ -120,16 +122,5 @@ class ProductController extends Controller
         $product->delete();
         flash("Produto Removido com Sucesso!")->success();
         return redirect()->route('admin.products.index');
-    }
-
-    private function imageUpload(Request $request, $imageColumn){
-        $images = $request->file('photos');
-        $uploadedImages = [];
-
-        foreach($images as $image){
-            $uploadedImages[] = [$imageColumn => $image->store('products','public')];
-        }
-
-        return $uploadedImages;
     }
 }
