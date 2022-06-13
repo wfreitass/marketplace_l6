@@ -3,13 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Product;
+use App\Traits\UploadTrait;
 use App\Http\Requests\ProductRequest;
 
 class ProductController extends Controller
 {
     private $product;
+
+    use UploadTrait;
 
     public function __construct(Product $product)
     {
@@ -54,7 +56,7 @@ class ProductController extends Controller
         $product->categories()->sync($data['categories']);
 
         if ($request->hasFile('photos')) {
-            $images = $this->imageUpload($request, 'image');
+            $images = $this->imageUpload($request->file('photos'), 'image');
             $product->photos()->createMany($images);
         }
 
@@ -101,10 +103,12 @@ class ProductController extends Controller
         $product = $this->product->find($product);
         $product->update($data);
         $product->categories()->sync($data['categories']);
+
         if ($request->hasFile('photos')) {
-            $images = $this->imageUpload($request, 'image');
+            $images = $this->imageUpload($request->file('photos'), 'image');
             $product->photos()->createMany($images);
         }
+
         flash("Produto Atualizado com Sucesso!")->success();
         return redirect()->route('admin.products.index');
     }
