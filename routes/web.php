@@ -18,11 +18,14 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route as FacadesRoute;
 
-Route::get('/', function () {
-    $helloWorld = "Hello World";
-    // return view('welcome',["helloWorld"=>$helloWorld]); usa qualquer umas das formas
-    return view('welcome', compact("helloWorld"));
-})->name('home');
+Route::get('/', 'HomeController@index')->name('home');
+Route::get('/product/{slug}', 'HomeController@single')->name('product.single');
+Route::prefix('cart')->name('cart.')->group(function(){
+    Route::get('/','CartController@index')->name('index');
+    Route::post('add','CartController@add')->name('add');
+});
+
+
 
 Route::group(['middleware' => ['auth']], function () {
     Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function () {
